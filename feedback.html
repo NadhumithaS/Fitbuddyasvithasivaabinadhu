@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback - FitBuddy.ASAN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#0a0a0a;color:white;min-height:100vh}
+.nav{background:#111;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.nav b{color:#ff9800;font-size:18px}
+.nav a{background:linear-gradient(135deg,#ff5722,#ff9800);color:white;padding:6px 14px;border-radius:20px;text-decoration:none;font-size:13px;margin-left:6px;font-weight:bold}
+
+.topic{background:linear-gradient(90deg,#667eea,#764ba2,#ff5722);background-size:200% 200%;animation:bgMove 5s ease infinite;padding:20px;text-align:center}
+@keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.topic h1{font-size:26px}
+.topic p{font-size:11px;margin-top:4px;opacity:0.9}
+
+.card{max-width:450px;margin:25px auto;background:#1a1a1a;padding:25px;border-radius:18px;border:1px solid rgba(255,152,0,0.2);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+.card h2{text-align:center;color:#ff9800;margin-bottom:8px}
+.card .sub{color:#aaa;font-size:12px;text-align:center;margin-bottom:20px}
+
+label{color:#ff9800;font-size:12px;font-weight:bold;margin-top:14px;display:block;letter-spacing:0.5px}
+input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:white;margin-top:6px;outline:none;font-size:14px}
+input:focus,select:focus,textarea:focus{border-color:#ff5722;box-shadow:0 0 10px rgba(255,87,34,0.3)}
+textarea{height:100px;resize:none}
+
+.stars{text-align:center;margin:15px 0;font-size:30px;letter-spacing:5px;cursor:pointer}
+.stars span{transition:0.2s;filter:grayscale(1)}
+.stars span.active{filter:grayscale(0);transform:scale(1.2)}
+
+button{width:100%;padding:14px;margin-top:20px;border:none;border-radius:12px;background:linear-gradient(90deg,#ff5722,#ff9800);color:white;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 6px 20px rgba(255,87,34,0.4)}
+button:hover{transform:scale(1.02)}
+
+.success{display:none;background:linear-gradient(135deg,#1a2e1a,#1e1e1e);border:1px solid #4caf50;padding:20px;border-radius:12px;text-align:center;margin-top:20px;animation:pop 0.4s}
+@keyframes pop{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="nav"><b>FitBuddy.ASAN 💪</b><div><a href="index.html">Home</a></div></div>
+<div class="topic">
+<h1>Feedback 💬</h1>
+<p>UNGAL KARUTHU ENNA? SOLLUNGA DA!</p>
+</div>
+
+<div class="card">
+<h2>Rate Your Experience ⭐</h2>
+<p class="sub">FitBuddy.ASAN epdi irukku? Feedback kudu da!</p>
+
+<label>👤 YOUR NAME</label>
+<input type="text" id="fname" placeholder="Ex: Nadhu / Asan">
+
+<label>📧 EMAIL (Optional)</label>
+<input type="email" id="email" placeholder="Ex: asan@gmail.com">
+
+<label>⭐ RATING</label>
+<div class="stars" id="stars">
+<span onclick="setStar(1)" id="s1">⭐</span>
+<span onclick="setStar(2)" id="s2">⭐</span>
+<span onclick="setStar(3)" id="s3">⭐</span>
+<span onclick="setStar(4)" id="s4">⭐</span>
+<span onclick="setStar(5)" id="s5">⭐</span>
+</div>
+
+<label>📝 YOUR FEEDBACK</label>
+<textarea id="msg" placeholder="Ex: App sema super da! Weight loss plan romba useful..."></textarea>
+
+<label>🎯 WHICH GOAL YOU LIKE?</label>
+<select id="goalLike">
+<option>Weight Loss Plan</option>
+<option>Muscle Gain Plan</option>
+<option>Stay Fit Plan</option>
+<option>Diet Chart</option>
+<option>Workout Plan</option>
+<option>All Super!</option>
+</select>
+
+<button onclick="submitFB()">SUBMIT FEEDBACK 🚀</button>
+
+<div class="success" id="success">
+<h3 style="color:#4caf50;font-size:20px">✅ Thank You Da! 🙏</h3>
+<p style="margin-top:10px;font-size:13px;line-height:1.5">
+Feedback receive pannitom!<br>
+Un support ku thanks da <b id="thankName">Asan</b>! 💪<br><br>
+<span style="color:#ff9800">FitBuddy.ASAN will improve for you!</span>
+</p>
+<button onclick="location.href='index.html'" style="background:#222;border:1px solid #333;margin-top:15px">Go to Home 🏠</button>
+</div>
+
+</div>
+
+<script>
+let rating=0;
+function setStar(n){
+rating=n;
+for(let i=1;i<=5;i++){
+document.getElementById('s'+i).classList.remove('active');
+}
+for(let i=1;i<=n;i++){
+document.getElementById('s'+i).classList.add('active');
+}
+}
+
+function submitFB(){
+let name=document.getElementById('fname').value||'Asan';
+let msg=document.getElementById('msg').value;
+if(!msg){alert("Feedback type pannu da asan!");return;}
+if(rating==0){alert("Star kududa da!");return;}
+document.getElementById('thankName').innerText=name;
+document.getElementById('success').style.display='block';
+window.scrollTo(0,9999);
+}
+</script>
+
+</body>
+</html>

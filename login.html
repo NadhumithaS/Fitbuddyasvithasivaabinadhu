@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - FitBuddy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Arial; }
+        body {
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff5722, #ff9800);
+            background-size: 400% 400%;
+            animation: move 8s ease infinite;
+        }
+        @keyframes move {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+        .box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 45px 35px;
+            border-radius: 25px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        h1 { color: white; font-size: 32px; }
+        p { color: #f0f0f0; margin: 10px 0 25px 0; }
+        input {
+            width: 100%; padding: 14px 18px; margin: 10px 0;
+            border-radius: 12px; border: none;
+            background: rgba(255,255,255,0.9);
+        }
+        button {
+            width: 100%; padding: 14px; margin-top: 20px;
+            border-radius: 12px; border: none;
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            color: white; font-size: 18px; font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div style="font-size:45px">💪🔥</div>
+        <h1>FitBuddy.ASAN</h1>
+        <p>Your Fitness Journey</p>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <a href="index.html"><button>LOGIN NOW →</button></a>
+    </div>
+</body>
+</html>

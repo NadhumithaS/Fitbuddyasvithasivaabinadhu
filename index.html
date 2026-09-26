@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FitBuddy.ASAN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#0a0a0a;color:white}
+.nav{background:#111;padding:12px 20px;display:flex;justify-content:space-between}
+.nav b{color:#ff9800}
+.nav a{background:orange;color:#fff;padding:6px 12px;border-radius:15px;text-decoration:none;font-size:12px;margin-left:5px}
+.topic{background:linear-gradient(90deg,#ff5722,#ff9800);padding:18px;text-align:center}
+.card{max-width:480px;margin:20px auto;background:#1a1a1a;padding:20px;border-radius:15px;border:1px solid #333}
+label{color:#ff9800;font-size:12px;font-weight:bold;margin-top:12px;display:block}
+input,select{width:100%;padding:11px;border-radius:8px;border:1px solid #333;background:#0f0f0f;color:white;margin-top:5px}
+button{width:100%;padding:13px;margin-top:15px;border:none;border-radius:10px;background:linear-gradient(90deg,#ff5722,#ff9800);color:white;font-weight:bold;cursor:pointer}
+.plan{display:none;margin-top:20px}
+.tab{display:flex;gap:5px;margin:15px 0}
+.tab div{flex:1;padding:8px;background:#222;border-radius:8px;text-align:center;font-size:12px;cursor:pointer;border:1px solid #333}
+.tab div.active{background:#ff5722;border-color:#ff9800}
+.box{background:#111;padding:12px;border-radius:10px;margin-top:10px;border-left:4px solid #ff9800;font-size:13px;line-height:1.6}
+.green{border-left-color:#4caf50}.red{border-left-color:#f44336}.blue{border-left-color:#2196f3}
+li{margin-left:15px;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="nav"><b>FitBuddy.ASAN 💪</b><div><a href="feedback.html">Feedback</a></div></div>
+<div class="topic"><h2>FitBuddy.ASAN 🔥</h2><p style="font-size:11px">YOUR PERSONAL FITNESS COACH</p></div>
+
+<div class="card" id="formCard">
+<h3 style="text-align:center;color:#ff9800">Fill Your Details 📝</h3>
+<label>👤 NAME</label><input id="name" placeholder="Ex: Nadhu">
+<label>🎂 AGE</label><input id="age" type="number" placeholder="22">
+<label>👥 GENDER</label><select id="gender"><option>Female</option><option>Male</option><option>Other</option></select>
+<label>📏 HEIGHT (cm)</label><input id="height" type="number" placeholder="145" value="145">
+<label>⚖️ WEIGHT (kg)</label><input id="weight" type="number" placeholder="45" value="45">
+<label>🎯 GOAL</label><select id="goal"><option>Weight Loss</option><option>Muscle Gain</option><option>Stay Fit</option></select>
+<button onclick="generatePlan()">CALCULATE & START 🚀</button>
+</div>
+
+<div class="card plan" id="planCard">
+<h3 id="welcome" style="color:#ff9800;text-align:center"></h3>
+<p id="bmiText" style="text-align:center;margin:10px 0;font-size:13px"></p>
+
+<div class="tab">
+<div class="active" onclick="showTab('diet',this)">🍱 Diet</div>
+<div onclick="showTab('dont',this)">🚫 Avoid</div>
+<div onclick="showTab('workout',this)">💪 Workout</div>
+</div>
+
+<div id="diet" class="box green"></div>
+<div id="dont" class="box red" style="display:none"></div>
+<div id="workout" class="box blue" style="display:none"></div>
+
+<button onclick="location.reload()" style="background:#222;border:1px solid #333;margin-top:15px">↻ New Plan</button>
+</div>
+
+<script>
+function generatePlan(){
+let name=document.getElementById('name').value||'Nadhu';
+let age=document.getElementById('age').value||'22';
+let h=document.getElementById('height').value;
+let w=document.getElementById('weight').value;
+let goal=document.getElementById('goal').value;
+let gender=document.getElementById('gender').value;
+
+if(!h||!w){alert("Height Weight podu da!");return;}
+let bmi=(w/((h/100)*(h/100))).toFixed(1);
+
+document.getElementById('formCard').style.display='none';
+document.getElementById('planCard').style.display='block';
+document.getElementById('welcome').innerHTML=`🔥 ${name} - Profile Ready!`;
+document.getElementById('bmiText').innerHTML=`Age: ${age} | ${gender} | BMI: <b style='color:#ff9800'>${bmi}</b> | Goal: <b>${goal}</b>`;
+
+if(goal=='Weight Loss'){
+document.getElementById('diet').innerHTML=`<b>✅ ENNA SAPDANUM (Weight Loss):</b><br>
+<li>Morning: Warm water + lemon, Oats + 1 egg white / Green tea + 2 idli + sambar</li>
+<li>Lunch: Brown rice + Chicken curry / Fish + Rasam + Veg</li>
+<li>Evening: Sprouts / Fruit (apple/guava)</li>
+<li>Dinner: 2 Chapathi + Veg curry + Curd (before 8pm)</li>
+<li>Daily 3L water must!</li>`;
+
+document.getElementById('dont').innerHTML=`<b>🚫 ENNA SAPDA KUDATHU:</b><br>
+<li>Oil foods, Parotta, Fried rice, Noodles</li>
+<li>Coke, Pepsi, Sweet, Ice cream, Cake</li>
+<li>Night 9pm mela sapda kudadhu</li>
+<li>White rice neraya kudadhu</li>`;
+
+document.getElementById('workout').innerHTML=`<b>💪 DAY 1 to DAY 7 PLAN:</b><br><br>
+<b>DAY 1 - Full Body Burn (Beginner - Female)</b><br>
+<li>Warmup: 5 min walking + stretching</li>
+<li>Jumping Jacks: 20 x 3 sets</li>
+<li>Pushups (Knee pushup): 5 x 3 sets</li>
+<li>Squats: 10 x 3 sets</li>
+<li>Plank: 20 sec x 3 sets</li>
+<li>Walking: 20 min</li><br>
+
+<b>DAY 2 - Core & Legs</b><br>
+<li>Crunches: 10 x 3</li>
+<li>Leg Raises: 10 x 3</li>
+<li>Squats: 12 x 3</li>
+<li>Lunges: 8 each leg</li>
+<li>Brisk Walk: 25 min</li><br>
+
+<b>DAY 3 - Rest + Diet only + 8000 steps</b><br><br>
+
+<b>DAY 4 to 7: Repeat Day1, Day2 cycle + Increase pushup to 8, squat to 15</b><br><br>
+<span style='color:#4caf50'>Tip: ${name} un weight 45kg than, so weight loss ku perusa cardio vena, toning + healthy eating pothum da!</span>`;
+}
+
+else if(goal=='Muscle Gain'){
+document.getElementById('diet').innerHTML=`<b>✅ Muscle Gain Diet:</b><li>6 eggs daily, Chicken 200g, Paneer, Banana 2, Peanut butter, Milk</li>`;
+document.getElementById('dont').innerHTML=`<b>🚫 Avoid:</b><li>Junk foods, Alcohol</li>`;
+document.getElementById('workout').innerHTML=`<b>💪 Muscle Gain Day 1:</b><li>Pushups: 15 x 4, Bench press, Pullups: 5 x 3, Squats 20kg x 10</li>`;
+}
+else{
+document.getElementById('diet').innerHTML=`<b>✅ Stay Fit Diet:</b><li>Balanced food + 3L water + Fruits</li>`;
+document.getElementById('dont').innerHTML=`<b>🚫 Avoid:</b><li>Too much oily & sugar</li>`;
+document.getElementById('workout').innerHTML=`<b>💪 Stay Fit Day 1:</b><li>Pushups 10x3, Squats 12x3, Plank 30sec, Walk 30min</li>`;
+}
+}
+
+function showTab(id,el){
+document.getElementById('diet').style.display='none';
+document.getElementById('dont').style.display='none';
+document.getElementById('workout').style.display='none';
+document.getElementById(id).style.display='block';
+document.querySelectorAll('.tab div').forEach(d=>d.classList.remove('active'));
+el.classList.add('active');
+}
+</script>
+</body>
+</html>
